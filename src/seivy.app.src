@@ -1,0 +1,12 @@
+{application, seivy,
+ [
+  {description, "Swedish Ivy - An Alternativy Dependency Manager"},
+  {vsn, "0.0.1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { yadm_app, []}},
+  {env, []}
+ ]}.

@@ -15,13 +15,25 @@
 
 - Currently it's possible to checkout a repository at version ".*" :-)
 
+## Note
+
+-module(plugin).
+-export([sowhat/2, main/1]).
+
+main(_) ->
+    sowhat(ok, ok).
+
+sowhat(_, _) ->
+    io:format("~p~n", [application:get_all_env(rebar)]),
+    ok.
+
 ## Local Repository Structure
 
 This is author/publisher oriented, so we would have a directory structure 
 something like this:
 
-    - .rebar (situated in $HOME)
-        - alt_deps_repository
+    - .seivy (situated in $HOME)
+        - repository
             - org
                 - nebularis
                     - eav-0.0.1

@@ -13,5 +13,24 @@
 %% KIND, either express or implied.  See the License for the
 %% specific language governing permissions and limitations
 %% under the License.
--module(seivy_local_repo).
+-module(siv_env).
+-include_lib("annotations/include/annotations.hrl").
 
+-export([init/0]).
+-export([home/0, get/2]).
+
+init() ->
+    memoize:init(?MODULE),
+    ets:insert_new(?MODULE, os_env:environment_variables()),
+    ok.
+
+%%
+%% Public API
+%%
+
+home() ->
+    get(seivy_home, filename:join(os_env:home_dir(), ".seivy")).
+
+-memoize(1).
+get(_What, Default) ->
+    Default.

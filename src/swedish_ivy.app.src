@@ -1,4 +1,4 @@
-{application, seivy,
+{application, swedish_ivy,
  [
   {description, "Swedish Ivy - An Alternativy Dependency Manager"},
   {vsn, "0.0.1"},
@@ -7,6 +7,6 @@
                   kernel,
                   stdlib
                  ]},
-  {mod, { yadm_app, []}},
-  {env, []}
+  {mod, {siv_app, []}},
+  {env, [{loglevel, info}]}
  ]}.

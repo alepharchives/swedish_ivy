@@ -13,19 +13,31 @@
 %% KIND, either express or implied.  See the License for the
 %% specific language governing permissions and limitations
 %% under the License.
--module(seivy_app).
+-module(siv_sup).
 
--export([start/2, stop/1]).
+-export([init/1, start_link/0]).
 
--behaviour(application).
+-behaviour(supervisor).
 
-%% Application callbacks
-%%<<< -export([start/2, stop/1]).
+%% API
+%%<<< -export([start_link/0]).
+
+%% Supervisor callbacks
+%%<<< -export([init/1]).
+
+%% Helper macro for declaring children of supervisor
+-define(CHILD(I, Type),
+	{I, {I, start_link, []}, permanent, 5000, Type, [I]}).
 
 %% ===================================================================
-%% Application callbacks
+%% API functions
 %% ===================================================================
 
-start(_StartType, _StartArgs) -> seivy_sup:start_link().
+start_link() ->
+    supervisor:start_link({local, ?MODULE}, ?MODULE, []).
 
-stop(_State) -> ok.
+%% ===================================================================
+%% Supervisor callbacks
+%% ===================================================================
+
+init([]) -> {ok, {{one_for_one, 5, 10}, []}}.
